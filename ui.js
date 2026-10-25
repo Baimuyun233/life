@@ -1,7 +1,7 @@
 /* 界面。所有数值都来自 engine，这里只负责显示和把操作转发过去。 */
 
 (function(){
-  var sim = null, speed = 4, selDrug = null, lastT = 0;
+  var sim = null, speed = 1, selDrug = null, lastT = 0;
   var trendVars = [
     {k:'MAP', c:'#ff7070'}, {k:'HR', c:'#5aa9ff'},
     {k:'K',   c:'#ffd166'}, {k:'SpO2', c:'#31f0a0'}
@@ -628,8 +628,16 @@
 
     $('btnRestart2').onclick = function(){
       startPreset($('presetSel').value);
-      setSpeed(4);
+      if (speed === 0) setSpeed(1);
     };
+
+    // 手机上药房是上拉面板
+    $('fab').onclick = function(){ document.body.classList.add('pharm-open'); };
+    $('pharmClose').onclick = function(){ document.body.classList.remove('pharm-open'); };
+    $('scrim').onclick = function(){ document.body.classList.remove('pharm-open'); };
+    window.addEventListener('resize', function(){
+      if (window.innerWidth > 860) document.body.classList.remove('pharm-open');
+    });
 
     $('btnShock').onclick = function(){ LIFE.shock(sim); renderLog(); };
     $('btnCpr').onclick = function(){

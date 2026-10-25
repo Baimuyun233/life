@@ -20,7 +20,7 @@ var AXIS_N = {
 
 var TG = {
   a1:   {n:'α₁',           g:{svr:1.0, vcap:0.6}},
-  a2:   {n:'α₂',           g:{chrono:-0.35, svr:0.25, cns:0.20}},
+  a2:   {n:'α₂',           g:{chrono:-0.35, svr:0.25, cns:0.08}},
   b1:   {n:'β₁',           g:{chrono:1.0, ino:1.0, avc:0.9, naex:0.25}},
   b2:   {n:'β₂',           g:{broncho:-1.0, svr:-0.45, kshift:0.9, gluc:0.35}},
   M2:   {n:'M₂ 胆碱',      g:{chrono:-1.6, avc:-0.9}},

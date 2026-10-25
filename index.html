@@ -35,12 +35,14 @@ input:focus,select:focus{border-color:#2b6b58}
   gap:6px;padding:6px}
 
 #top{grid-area:top;display:flex;align-items:center;gap:8px;
-  background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:0 10px}
-#top .brand{font-weight:700;letter-spacing:3px;color:var(--acc);font-size:14px}
-#top .sep{width:1px;height:18px;background:var(--line)}
-#clock{font-family:Consolas,monospace;font-size:15px;color:#8fe6c4;min-width:56px}
-.spd button{padding:2px 7px;font-size:12px}
-#top .grow{flex:1}
+  background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:0 10px;
+  overflow-x:auto;white-space:nowrap}
+#top .brand{font-weight:700;letter-spacing:3px;color:var(--acc);font-size:14px;flex:0 0 auto}
+.tgroup{display:flex;align-items:center;gap:6px;flex:0 0 auto}
+#tgTools{margin-left:auto}
+#clock{font-family:Consolas,monospace;font-size:15px;color:#8fe6c4;min-width:52px}
+.spd{display:flex;gap:2px}
+.spd button{padding:2px 7px;font-size:12px;white-space:nowrap}
 
 #ecgwrap{grid-area:ecg;position:relative;background:#08090c;border:1px solid var(--line);
   border-radius:5px;overflow:hidden;display:flex;flex-direction:column}
@@ -180,6 +182,81 @@ input:focus,select:focus{border-color:#2b6b58}
 #errbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:99;
   background:#3a0f0f;border-top:1px solid #7a2323;color:#ffb3b3;
   font:12px Consolas,monospace;padding:6px 10px;white-space:pre-wrap;max-height:40vh;overflow:auto}
+
+#scrim{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:36}
+body.pharm-open #scrim{display:block}
+#fab{display:none;position:fixed;right:14px;bottom:16px;z-index:45;
+  padding:11px 20px;border-radius:22px;font-size:14px;font-weight:600;
+  background:#12352a;border:1px solid #2f7f66;color:#9dffd4;
+  box-shadow:0 6px 20px rgba(0,0,0,.5)}
+#pharmClose{display:none}
+
+/* ── 手机 ─────────────────────────────────── */
+@media (max-width:860px){
+  html,body{height:auto;overflow-y:auto;overflow-x:hidden}
+  body{-webkit-text-size-adjust:100%}
+  #app{display:flex;flex-direction:column;height:auto;
+    min-height:100vh;min-height:100dvh;padding:5px;gap:5px}
+  #top{flex-wrap:wrap;height:auto;padding:6px 8px;gap:5px;
+    overflow:visible;white-space:normal}
+  #top .brand{flex:0 0 auto}
+  #presetSel{flex:1 1 auto;min-width:0;padding:7px}
+  #tgTime{flex:1 1 100%;justify-content:space-between;gap:5px}
+  #tgTools{flex:1 1 100%;margin-left:0;display:flex;flex-wrap:wrap;gap:4px}
+  #tgTools button{flex:1 1 calc(50% - 4px);min-width:0;padding:7px 2px;
+    font-size:11.5px;white-space:nowrap;text-align:center}
+  #clock{min-width:40px;font-size:14px}
+  .spd{gap:2px}
+  .spd button{flex:1 1 0;padding:6px 2px;font-size:12px;min-width:0}
+  #btnStep{padding:6px 7px;font-size:11.5px;flex:0 0 auto}
+
+  #ecgwrap{flex:0 0 290px;height:290px}
+  #ecgtop{font-size:11px;gap:8px;left:8px;right:8px}
+  #rhythmName{font-size:13px}
+  #ecgright{font-size:10px}
+  #waveStack{padding-top:17px}
+  #ecgfoot{height:30px;flex:0 0 30px}
+  #ecgfoot b{padding:2px 7px}
+
+  #vitals,#labs{grid-template-columns:repeat(3,1fr);padding:5px;gap:4px}
+  .tile{min-height:50px;padding:4px 6px}
+  .tile .k{font-size:10px}
+  .tile .v{font-size:17px}
+  .tile .u{font-size:9px}
+
+  #ops{height:auto;flex-wrap:wrap;padding:7px 8px;gap:6px}
+  #ops button{padding:7px 11px;font-size:13px}
+  #ops select{padding:6px}
+
+  #trend{flex:0 0 160px;height:160px}
+  #log{flex:0 0 170px;height:170px}
+
+  /* 药房做成上拉面板 */
+  #pharm{position:fixed;left:0;right:0;bottom:0;height:78vh;height:78dvh;z-index:40;
+    border-radius:12px 12px 0 0;border-bottom:0;
+    transform:translateY(103%)}
+  body.pharm-open #pharm{transform:none}
+  #pharmClose{display:block;padding:5px 12px}
+  #fab{display:block}
+  body.pharm-open #fab{display:none}
+  .drug{padding:8px 10px}
+  #drugPanel .row{gap:8px}
+  #drugPanel input{font-size:15px;padding:7px}
+  #drugPanel button{padding:8px 13px;font-size:13.5px}
+  .routeBtn{padding:8px 14px}
+
+  #modal{padding:10px;align-items:flex-end}
+  #modalBox{max-height:88vh;max-height:88dvh;padding:14px}
+  .toast{font-size:12.5px;padding:5px 11px}
+  .alarm{font-size:11.5px;padding:2px 8px}
+  #alarms{bottom:36px;max-width:82%}
+}
+
+@media (max-width:360px){
+  #vitals,#labs{grid-template-columns:repeat(2,1fr)}
+  .tile .v{font-size:15.5px}
+  #top .brand{display:none}
+}
 </style>
 <script>
 window.onerror = function(m, src, line, col){
@@ -194,23 +271,22 @@ window.onerror = function(m, src, line, col){
 <div id="app">
   <div id="top">
     <div class="brand">LIFE</div>
-    <div class="sep"></div>
     <select id="presetSel" title="病人"></select>
-    <div class="sep"></div>
-    <div class="spd" id="spdBtns">
-      <button data-v="0">暂停</button><button data-v="1">1×</button><button data-v="2">2×</button><button data-v="4" class="on">4×</button><button data-v="8">8×</button><button data-v="16">16×</button>
+    <div class="tgroup" id="tgTime">
+      <div id="clock" class="num">00:00</div>
+      <div class="spd" id="spdBtns">
+        <button data-v="0">暂停</button><button data-v="1" class="on">1×</button><button data-v="2">2×</button><button data-v="4">4×</button><button data-v="8">8×</button><button data-v="16">16×</button>
+      </div>
+      <button id="btnStep">单步 5s</button>
     </div>
-    <button id="btnStep">单步 5s</button>
-    <div class="sep"></div>
-    <div id="clock" class="num">00:00</div>
-    <div class="grow"></div>
-    <button id="btnAudit">待补清单</button>
-    <button id="btnCheck">自检</button>
-    <div class="sep"></div>
-    <button id="btnSave">存档</button>
-    <button id="btnLoad">读档</button>
-    <button id="btnCsv">导出 CSV</button>
-    <button id="btnReset">重开</button>
+    <div class="tgroup" id="tgTools">
+      <button id="btnAudit">待补清单</button>
+      <button id="btnCheck">自检</button>
+      <button id="btnSave">存档</button>
+      <button id="btnLoad">读档</button>
+      <button id="btnCsv">导出 CSV</button>
+      <button id="btnReset">重开</button>
+    </div>
   </div>
 
   <div id="ecgwrap">
@@ -260,6 +336,7 @@ window.onerror = function(m, src, line, col){
     <div id="pharmhead">
       <input id="drugSearch" placeholder="搜索药名">
       <select id="catSel"></select>
+      <button id="pharmClose">收起</button>
     </div>
     <div id="drugList"></div>
     <div id="drugPanel"></div>
@@ -268,6 +345,8 @@ window.onerror = function(m, src, line, col){
       <div id="rxList"></div>
     </div>
   </div>
+  <button id="fab">药房</button>
+  <div id="scrim"></div>
 </div>
 
 <div id="modal"><div id="modalBox">
